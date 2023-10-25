@@ -7,6 +7,6 @@ include /masm32/include/masm32.inc
 include /masm32/include/gdi32.inc
 include /masm32/include/user32.inc
 include /masm32/include/kernel32.inc
-includelib D:\whatidid\junior1\assembly\Irvine\Irvine32.lib
+
 
 ;Irvine32ÖÐµÄº¯Êý
