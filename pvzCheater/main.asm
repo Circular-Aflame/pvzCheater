@@ -41,7 +41,7 @@ LO: ;开始循环等待指令
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
     ;识别指令
-    cmp cmdin,cover
+    cmp cmdin,cOver
     
 
     jmp done
