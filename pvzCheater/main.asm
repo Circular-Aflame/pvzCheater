@@ -5,12 +5,13 @@ option casemap:none
 
 includelib      msvcrt.lib
 include         msvcrt.inc
+include         windows.inc
 
 .data
-scanMsg			byte    "%d %d", 0
-ansMsg			byte    "%d", 0  ; 0ah 0dh是回车换行
-varA			dword  0
-varB			dword  0
+hwnd  HANDLE ?
+NAME  byte "PlantsVsZombies Plus Version 95",0
+
+
 
 .code
 main PROC
