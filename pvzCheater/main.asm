@@ -1,48 +1,57 @@
 include         util.inc
  
 .data
-hp      dword   0       ;½ø³Ì¾ä±ú
+hp      dword   0       ;è¿›ç¨‹å¥æŸ„
 pid     dword   0   
-pname   byte    "Ö²Îï´óÕ½½©Ê¬ÖÐÎÄ°æ",0
+pname   byte    "æ¤ç‰©å¤§æˆ˜åƒµå°¸ä¸­æ–‡ç‰?,0
 lineM   byte    0ah,0dh,66 DUP("^"),0ah,0dh,0
-greetM  byte    "--------»¶Ó­À´µ½PVZ Cheater-----",0ah,0dh,0
-errorM  byte    "---/*_*\±§Ç¸£¡ËÆºõ²»´æÔÚ»î×ÅµÄ½©Ê¬£¬ÇëÈ·±£´ò¿ªÁËÓÎÏ·£¡",0ah,0dh,0
-sucM    byte    "-\*o*/³É¹¦ÕÒµ½ÄúµÄ»¨Ô°£¬Çë¿ªÊ¼Îèµ¸°É£¡",0ah,0dh,0
-cmdM    byte    "-\*o*/ÒÔÏÂÊÇÄúµÄ»¨Ô°·þÎñ²Ëµ¥£¬ÇëÊäÈëÖ¸ÁîÐòºÅ»ñÈ¡·þÎñ",0ah,0dh,0
-reqM    byte    "ÏÈÀ´µã£º ",0
+greetM  byte    "--------æ¬¢è¿Žæ¥åˆ°PVZ Cheater-----",0ah,0dh,0
+errorM  byte    "---/*_*\æŠ±æ­‰ï¼ä¼¼ä¹Žä¸å­˜åœ¨æ´»ç€çš„åƒµå°¸ï¼Œè¯·ç¡®ä¿æ‰“å¼€äº†æ¸¸æˆï¼",0ah,0dh,0
+sucM    byte    "-\*o*/æˆåŠŸæ‰¾åˆ°æ‚¨çš„èŠ±å›­ï¼Œè¯·å¼€å§‹èˆžè¹ˆå§ï¼?,0ah,0dh,0
+cmdM    byte    "-\*o*/ä»¥ä¸‹æ˜¯æ‚¨çš„èŠ±å›­æœåŠ¡èœå•ï¼Œè¯·è¾“å…¥æŒ‡ä»¤åºå·èŽ·å–æœåŠ?,0ah,0dh,0
+reqM    byte    "å…ˆæ¥ç‚¹ï¼š ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
+<<<<<<< HEAD
 ;ÒÔÏÂÖð¸ö¶¨ÒåÖ¸Áî´úÂë
 cOver       dword   0       ;½áÊøÖ¸Áî
 cFreeSun    dword   1       ;Ãâ·ÑÖ²ÎïÖ¸Áî
+=======
+;ä»¥ä¸‹é€ä¸ªå®šä¹‰æŒ‡ä»¤ä»£ç 
+cOver   dword   0
+>>>>>>> 4579d6d82bb981db241b95807e22611d57602b32
 
 
 .code
 main PROC
-    invoke crt_printf,offset greetM         ;´òÓ¡»¶Ó­ÐÅÏ¢
+    invoke crt_printf,offset greetM         ;æ‰“å°æ¬¢è¿Žä¿¡æ¯
     invoke crt_printf,offset lineM
-    ;ÀûÓÃÃû³Æ»ñÈ¡ÓÎÏ·´°¿Ú
+    ;åˆ©ç”¨åç§°èŽ·å–æ¸¸æˆçª—å£
     invoke FindWindowA, NULL, ADDR pname
     cmp eax, 0
     je error
-    ;»ñÈ¡´°¿Úpid²¢´ò¿ª¾ä±ú
+    ;èŽ·å–çª—å£pidå¹¶æ‰“å¼€å¥æŸ„
     invoke GetWindowThreadProcessId, eax, offset pid
     invoke OpenProcess, PROCESS_ALL_ACCESS, NULL, pid
     cmp eax, INVALID_HANDLE_VALUE
     je error
-    ;±£´æ¾ä±ú´òÓ¡³É¹¦ÐÅÏ¢
+    ;ä¿å­˜å¥æŸ„æ‰“å°æˆåŠŸä¿¡æ¯
     mov hp,eax
     invoke crt_printf,offset sucM
     invoke crt_printf,offset lineM
-    ;ÏÔÊ¾Ö¸Áî²Ëµ¥
+    ;æ˜¾ç¤ºæŒ‡ä»¤èœå•
     invoke crt_printf,offset cmdM
-LO: ;¿ªÊ¼Ñ­»·µÈ´ýÖ¸Áî
+LO: ;å¼€å§‹å¾ªçŽ¯ç­‰å¾…æŒ‡ä»?
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
 
+<<<<<<< HEAD
     ;±ØÐëÓÃ¼Ä´æÆ÷À´cmp
+=======
+    ;å¿…é¡»ç”¨å¯„å­˜å™¨æ¥cmp
+>>>>>>> 4579d6d82bb981db241b95807e22611d57602b32
     mov eax,cmdin
-    ;Öð¸öÊ¶±ðÖ¸Áî
+    ;é€ä¸ªè¯†åˆ«æŒ‡ä»¤
     cmp eax,cOver
     .if ZERO?
         jmp done
@@ -55,12 +64,13 @@ LO: ;¿ªÊ¼Ñ­»·µÈ´ýÖ¸Áî
     .endif
 
 
+
     jmp LO
-error:  ;´íÎó´¦Àí
+error:  ;é”™è¯¯å¤„ç†
     invoke crt_printf,offset errorM
     ret
 
-done:   ;Õý³£¹Ø±Õ
+done:   ;æ­£å¸¸å…³é—­
     invoke CloseHandle,hp
     ret
 main endp
