@@ -1,7 +1,4 @@
 include         util.inc
-
-include     /masm32/include/msvcrt.inc
-includelib  /masm32/lib/msvcrt.lib
  
 .data
 hp      dword   0       ;进程句柄
@@ -16,7 +13,8 @@ reqM    byte    "先来点： ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
 ;以下逐个定义指令代码
-cOver   dword   0
+cOver       dword   0       ;结束指令
+cFreeSun    dword   1       ;免费植物指令
 
 
 .code
@@ -41,6 +39,7 @@ main PROC
 LO: ;开始循环等待指令
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
+
     ;必须用寄存器来cmp
     mov eax,cmdin
     ;逐个识别指令
@@ -49,7 +48,11 @@ LO: ;开始循环等待指令
         jmp done
     .endif
     
-    ;cmp 
+    cmp eax,cFreeSun
+    .if ZERO?
+        invoke freeSun,hp
+        jmp LO
+    .endif
 
 
     jmp LO
