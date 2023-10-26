@@ -15,6 +15,7 @@ cmdM    byte    "-\*o*/以下是您的花园服务菜单，请输入指令序号获取服务",0ah,0dh,0
 reqM    byte    "先来点： ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
+;以下逐个定义指令代码
 cOver   dword   0
 
 
@@ -40,11 +41,18 @@ main PROC
 LO: ;开始循环等待指令
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
-    ;识别指令
-    ;cmp cmdin,cOver
-    ;尝试是否能正常提交
+    ;必须用寄存器来cmp
+    mov eax,cmdin
+    ;逐个识别指令
+    cmp eax,cOver
+    .if ZERO?
+        jmp done
+    .endif
+    
+    ;cmp 
 
-    jmp done
+
+    jmp LO
 error:  ;错误处理
     invoke crt_printf,offset errorM
     ret
