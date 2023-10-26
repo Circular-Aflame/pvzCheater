@@ -1,7 +1,7 @@
 include         util.inc
 
-include     msvcrt.inc
-includelib  msvcrt.lib
+include     /masm32/include/msvcrt.inc
+includelib  /masm32/lib/msvcrt.lib
  
 .data
 hp      dword   0       ;½ø³Ì¾ä±ú
