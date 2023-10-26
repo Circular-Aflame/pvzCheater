@@ -1,57 +1,48 @@
 include         util.inc
  
 .data
-hp      dword   0       ;进程句柄
+hp      dword   0       ;���̾��
 pid     dword   0   
-pname   byte    "植物大战僵尸中文�?,0
+pname   byte    "ֲ���ս��ʬ���İ�",0
 lineM   byte    0ah,0dh,66 DUP("^"),0ah,0dh,0
-greetM  byte    "--------欢迎来到PVZ Cheater-----",0ah,0dh,0
-errorM  byte    "---/*_*\抱歉！似乎不存在活着的僵尸，请确保打开了游戏！",0ah,0dh,0
-sucM    byte    "-\*o*/成功找到您的花园，请开始舞蹈吧�?,0ah,0dh,0
-cmdM    byte    "-\*o*/以下是您的花园服务菜单，请输入指令序号获取服�?,0ah,0dh,0
-reqM    byte    "先来点： ",0
+greetM  byte    "--------��ӭ����PVZ Cheater-----",0ah,0dh,0
+errorM  byte    "---/*_*\��Ǹ���ƺ������ڻ��ŵĽ�ʬ����ȷ��������Ϸ��",0ah,0dh,0
+sucM    byte    "-\*o*/�ɹ��ҵ����Ļ�԰���뿪ʼ�赸�ɣ�",0ah,0dh,0
+cmdM    byte    "-\*o*/���������Ļ�԰����˵���������ָ����Ż�ȡ����",0ah,0dh,0
+reqM    byte    "�����㣺 ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
-<<<<<<< HEAD
 ;�����������ָ�����
 cOver       dword   0       ;����ָ��
 cFreeSun    dword   1       ;���ֲ��ָ��
-=======
-;以下逐个定义指令代码
-cOver   dword   0
->>>>>>> 4579d6d82bb981db241b95807e22611d57602b32
 
 
 .code
 main PROC
-    invoke crt_printf,offset greetM         ;打印欢迎信息
+    invoke crt_printf,offset greetM         ;��ӡ��ӭ��Ϣ
     invoke crt_printf,offset lineM
-    ;利用名称获取游戏窗口
+    ;�������ƻ�ȡ��Ϸ����
     invoke FindWindowA, NULL, ADDR pname
     cmp eax, 0
     je error
-    ;获取窗口pid并打开句柄
+    ;��ȡ����pid���򿪾��
     invoke GetWindowThreadProcessId, eax, offset pid
     invoke OpenProcess, PROCESS_ALL_ACCESS, NULL, pid
     cmp eax, INVALID_HANDLE_VALUE
     je error
-    ;保存句柄打印成功信息
+    ;��������ӡ�ɹ���Ϣ
     mov hp,eax
     invoke crt_printf,offset sucM
     invoke crt_printf,offset lineM
-    ;显示指令菜单
+    ;��ʾָ��˵�
     invoke crt_printf,offset cmdM
-LO: ;开始循环等待指�?
+LO: ;��ʼѭ���ȴ�ָ��
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
 
-<<<<<<< HEAD
     ;�����üĴ�����cmp
-=======
-    ;必须用寄存器来cmp
->>>>>>> 4579d6d82bb981db241b95807e22611d57602b32
     mov eax,cmdin
-    ;逐个识别指令
+    ;���ʶ��ָ��
     cmp eax,cOver
     .if ZERO?
         jmp done
@@ -64,13 +55,12 @@ LO: ;开始循环等待指�?
     .endif
 
 
-
     jmp LO
-error:  ;错误处理
+error:  ;������
     invoke crt_printf,offset errorM
     ret
 
-done:   ;正常关闭
+done:   ;�����ر�
     invoke CloseHandle,hp
     ret
 main endp
