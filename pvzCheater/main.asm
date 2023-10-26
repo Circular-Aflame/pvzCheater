@@ -1,7 +1,4 @@
 include         util.inc
-
-include     /masm32/include/msvcrt.inc
-includelib  /masm32/lib/msvcrt.lib
  
 .data
 hp      dword   0       ;进程句柄
@@ -15,7 +12,9 @@ cmdM    byte    "-\*o*/以下是您的花园服务菜单，请输入指令序号获取服务",0ah,0dh,0
 reqM    byte    "先来点： ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
-cOver   dword   0
+;以下逐个定义指令代码
+cOver       dword   0       ;结束指令
+cFreeSun    dword   1       ;免费植物指令
 
 
 .code
@@ -40,11 +39,23 @@ main PROC
 LO: ;开始循环等待指令
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
-    ;识别指令
-    ;cmp cmdin,cOver
-    
 
-    jmp done
+    ;必须用寄存器来cmp
+    mov eax,cmdin
+    ;逐个识别指令
+    cmp eax,cOver
+    .if ZERO?
+        jmp done
+    .endif
+    
+    cmp eax,cFreeSun
+    .if ZERO?
+        invoke freeSun,hp
+        jmp LO
+    .endif
+
+
+    jmp LO
 error:  ;错误处理
     invoke crt_printf,offset errorM
     ret
