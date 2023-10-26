@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# 项目属性
+pvzCheater/*.vcxproj
+
 # User-specific files
 *.rsuser
 *.suo
