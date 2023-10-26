@@ -4,46 +4,47 @@ include     /masm32/include/msvcrt.inc
 includelib  /masm32/lib/msvcrt.lib
  
 .data
-hp      dword   0       ;½ø³Ì¾ä±ú
+hp      dword   0       ;è¿›ç¨‹å¥æŸ„
 pid     dword   0   
-pname   byte    "Ö²Îï´óÕ½½©Ê¬ÖĞÎÄ°æ",0
+pname   byte    "æ¤ç‰©å¤§æˆ˜åƒµå°¸ä¸­æ–‡ç‰ˆ",0
 lineM   byte    0ah,0dh,66 DUP("^"),0ah,0dh,0
-greetM  byte    "--------»¶Ó­À´µ½PVZ Cheater-----",0ah,0dh,0
-errorM  byte    "---/*_*\±§Ç¸£¡ËÆºõ²»´æÔÚ»î×ÅµÄ½©Ê¬£¬ÇëÈ·±£´ò¿ªÁËÓÎÏ·£¡",0ah,0dh,0
-sucM    byte    "-\*o*/³É¹¦ÕÒµ½ÄúµÄ»¨Ô°£¬Çë¿ªÊ¼Îèµ¸°É£¡",0ah,0dh,0
-cmdM    byte    "-\*o*/ÒÔÏÂÊÇÄúµÄ»¨Ô°·şÎñ²Ëµ¥£¬ÇëÊäÈëÖ¸ÁîĞòºÅ»ñÈ¡·şÎñ",0ah,0dh,0
-reqM    byte    "ÏÈÀ´µã£º ",0
+greetM  byte    "--------æ¬¢è¿æ¥åˆ°PVZ Cheater-----",0ah,0dh,0
+errorM  byte    "---/*_*\æŠ±æ­‰ï¼ä¼¼ä¹ä¸å­˜åœ¨æ´»ç€çš„åƒµå°¸ï¼Œè¯·ç¡®ä¿æ‰“å¼€äº†æ¸¸æˆï¼",0ah,0dh,0
+sucM    byte    "-\*o*/æˆåŠŸæ‰¾åˆ°æ‚¨çš„èŠ±å›­ï¼Œè¯·å¼€å§‹èˆè¹ˆå§ï¼",0ah,0dh,0
+cmdM    byte    "-\*o*/ä»¥ä¸‹æ˜¯æ‚¨çš„èŠ±å›­æœåŠ¡èœå•ï¼Œè¯·è¾“å…¥æŒ‡ä»¤åºå·è·å–æœåŠ¡",0ah,0dh,0
+reqM    byte    "å…ˆæ¥ç‚¹ï¼š ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
-;ÒÔÏÂÖğ¸ö¶¨ÒåÖ¸Áî´úÂë
+;ä»¥ä¸‹é€ä¸ªå®šä¹‰æŒ‡ä»¤ä»£ç 
 cOver   dword   0
 
 
 .code
 main PROC
-    invoke crt_printf,offset greetM         ;´òÓ¡»¶Ó­ĞÅÏ¢
+    invoke crt_printf,offset greetM         ;æ‰“å°æ¬¢è¿ä¿¡æ¯
     invoke crt_printf,offset lineM
-    ;ÀûÓÃÃû³Æ»ñÈ¡ÓÎÏ·´°¿Ú
+    ;åˆ©ç”¨åç§°è·å–æ¸¸æˆçª—å£
     invoke FindWindowA, NULL, ADDR pname
     cmp eax, 0
     je error
-    ;»ñÈ¡´°¿Úpid²¢´ò¿ª¾ä±ú
+    ;è·å–çª—å£pidå¹¶æ‰“å¼€å¥æŸ„
     invoke GetWindowThreadProcessId, eax, offset pid
     invoke OpenProcess, PROCESS_ALL_ACCESS, NULL, pid
     cmp eax, INVALID_HANDLE_VALUE
     je error
-    ;±£´æ¾ä±ú´òÓ¡³É¹¦ĞÅÏ¢
+    ;ä¿å­˜å¥æŸ„æ‰“å°æˆåŠŸä¿¡æ¯
     mov hp,eax
     invoke crt_printf,offset sucM
     invoke crt_printf,offset lineM
-    ;ÏÔÊ¾Ö¸Áî²Ëµ¥
+    ;æ˜¾ç¤ºæŒ‡ä»¤èœå•
     invoke crt_printf,offset cmdM
-LO: ;¿ªÊ¼Ñ­»·µÈ´ıÖ¸Áî
+LO: ;å¼€å§‹å¾ªç¯ç­‰å¾…æŒ‡ä»¤
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
-    ;±ØĞëÓÃ¼Ä´æÆ÷À´cmp
+
+    ;å¿…é¡»ç”¨å¯„å­˜å™¨æ¥cmp
     mov eax,cmdin
-    ;Öğ¸öÊ¶±ğÖ¸Áî
+    ;é€ä¸ªè¯†åˆ«æŒ‡ä»¤
     cmp eax,cOver
     .if ZERO?
         jmp done
@@ -52,12 +53,13 @@ LO: ;¿ªÊ¼Ñ­»·µÈ´ıÖ¸Áî
     ;cmp 
 
 
+
     jmp LO
-error:  ;´íÎó´¦Àí
+error:  ;é”™è¯¯å¤„ç†
     invoke crt_printf,offset errorM
     ret
 
-done:   ;Õı³£¹Ø±Õ
+done:   ;æ­£å¸¸å…³é—­
     invoke CloseHandle,hp
     ret
 main endp
