@@ -41,8 +41,8 @@ LO: ;开始循环等待指令
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
     ;识别指令
-    ;cmp cmdin,cOver
-    ;尝试是否能正常提交
+    cmp cmdin,cOver
+    
 
     jmp done
 error:  ;错误处理
