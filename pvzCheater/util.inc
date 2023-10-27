@@ -12,5 +12,6 @@ includelib  /masm32/lib/msvcrt.lib
 
 
 ;函数声明
-freeSun		proto,	hp:dword
-setMoney	proto,	hp:dword
+freeSun		proto,	hp:dword		;不消耗阳光
+stealMoney	proto,	hp:dword		;设置金币
+stealSun	proto,	hp:dword		;设置阳光

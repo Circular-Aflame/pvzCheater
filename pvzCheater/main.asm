@@ -13,9 +13,10 @@ reqM    byte    "先来点： ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
 ;以下逐个定义指令代码
-cOver       dword   0       ;结束指令
-cFreeSun    dword   1       ;免费植物指令
-cSetMoney   dword   2       ;设置金币指令
+cOver           dword       0       ;结束指令
+cFreeSun        dword       1       ;免费植物指令
+cStealMoney     dword       2       ;设置金币指令
+cStealSun       dword       3       ;设置阳光指令
 
 
 .code
@@ -55,9 +56,15 @@ LO: ;开始循环等待指令
         jmp LO
     .endif
     
-    cmp eax,cSetMoney
+    cmp eax,cStealMoney
     .if Zero?
-        invoke setMoney,hp
+        invoke stealMoney,hp
+        jmp LO
+    .endif
+
+    cmp eax,cStealSun
+    .if Zero?
+        invoke stealSun,hp
         jmp LO
     .endif
 
