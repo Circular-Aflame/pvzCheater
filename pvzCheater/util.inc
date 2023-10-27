@@ -12,4 +12,5 @@ includelib  /masm32/lib/msvcrt.lib
 
 
 ;º¯ÊýÉùÃ÷
-freeSun PROTO,hp:dword
+freeSun		proto,	hp:dword
+setMoney	proto,	hp:dword

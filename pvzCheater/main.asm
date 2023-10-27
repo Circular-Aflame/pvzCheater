@@ -15,6 +15,7 @@ cmdin   dword   ?
 ;以下逐个定义指令代码
 cOver       dword   0       ;结束指令
 cFreeSun    dword   1       ;免费植物指令
+cSetMoney   dword   2       ;设置金币指令
 
 
 .code
@@ -53,7 +54,12 @@ LO: ;开始循环等待指令
         invoke freeSun,hp
         jmp LO
     .endif
-
+    
+    cmp eax,cSetMoney
+    .if Zero?
+        invoke setMoney,hp
+        jmp LO
+    .endif
 
     jmp LO
 error:  ;错误处理
