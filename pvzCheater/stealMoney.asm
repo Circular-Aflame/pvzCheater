@@ -10,7 +10,7 @@ endMsg		byte		"°×æÎ½ð±Ò³É¹¦£¡£¡£¡",0ah,0dh,0
 
 .code
 
-setMoney proc, 
+stealMoney proc, 
 	hp: dword
 
 	invoke crt_printf,offset coinSet
@@ -26,6 +26,6 @@ setMoney proc,
 	invoke crt_printf, offset endMsg
 
 	ret
-setMoney endp
+stealMoney endp
 
 end

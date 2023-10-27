@@ -21,7 +21,10 @@
     <MASM Include="freeSun.asm">
       <Filter>源文件</Filter>
     </MASM>
-    <MASM Include="setMoney.asm">
+    <MASM Include="stealMoney.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="stealSun.asm">
       <Filter>源文件</Filter>
     </MASM>
   </ItemGroup>
