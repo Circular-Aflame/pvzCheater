@@ -9,6 +9,12 @@ greetM  byte    "--------欢迎来到PVZ Cheater-----",0ah,0dh,0
 errorM  byte    "---/*_*\抱歉！似乎不存在活着的僵尸，请确保打开了游戏！",0ah,0dh,0
 sucM    byte    "-\*o*/成功找到您的花园，请开始舞蹈吧！",0ah,0dh,0
 cmdM    byte    "-\*o*/以下是您的花园服务菜单，请输入指令序号获取服务",0ah,0dh,0
+listM   byte    "0 - 到此为止吧。",0ah,0dh,
+                "1 - 不想花阳光qwq",0ah,0dh,
+                "2 - 来钱！",0ah,0dh,
+                "3 - 发光！",0ah,0dh,
+                "4 - 勤于播种，不分昼夜！",0ah,0dh,
+                0
 reqM    byte    "先来点： ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
@@ -17,6 +23,7 @@ cOver           dword       0       ;结束指令
 cFreeSun        dword       1       ;免费植物指令
 cStealMoney     dword       2       ;设置金币指令
 cStealSun       dword       3       ;设置阳光指令
+cAlwaysOn       dword       4       ;取消冷却指令
 
 
 .code
@@ -38,6 +45,7 @@ main PROC
     invoke crt_printf,offset lineM
     ;显示指令菜单
     invoke crt_printf,offset cmdM
+    invoke crt_printf,offset listM
 LO: ;开始循环等待指令
     invoke crt_printf,offset reqM
     invoke crt_scanf,offset scanM,offset cmdin
@@ -65,6 +73,12 @@ LO: ;开始循环等待指令
     cmp eax,cStealSun
     .if Zero?
         invoke stealSun,hp
+        jmp LO
+    .endif
+
+    cmp eax,cAlwaysOn
+    .if Zero?
+        invoke alwaysOn,hp
         jmp LO
     .endif
 

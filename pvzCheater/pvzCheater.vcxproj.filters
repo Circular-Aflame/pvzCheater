@@ -27,6 +27,9 @@
     <MASM Include="stealSun.asm">
       <Filter>源文件</Filter>
     </MASM>
+    <MASM Include="alwaysOn.asm">
+      <Filter>源文件</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <None Include="util.inc">

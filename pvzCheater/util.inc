@@ -15,3 +15,4 @@ includelib  /masm32/lib/msvcrt.lib
 freeSun		proto,	hp:dword		;不消耗阳光
 stealMoney	proto,	hp:dword		;设置金币
 stealSun	proto,	hp:dword		;设置阳光
+alwaysOn	proto,	hp:dword		;无冷却
