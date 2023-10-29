@@ -14,6 +14,7 @@ listM   byte    "0 - 到此为止吧。",0ah,0dh,
                 "2 - 来钱！",0ah,0dh,
                 "3 - 发光！",0ah,0dh,
                 "4 - 勤于播种，不分昼夜！",0ah,0dh,
+                "5 - 让植物做一点随机子弹练习",0ah,0dh,
                 0
 reqM    byte    "先来点： ",0
 scanM   byte    "%d",0
@@ -24,6 +25,7 @@ cFreeSun        dword       1       ;免费植物指令
 cStealMoney     dword       2       ;设置金币指令
 cStealSun       dword       3       ;设置阳光指令
 cAlwaysOn       dword       4       ;取消冷却指令
+cRandomBullet   dword       5       ;随机子弹指令
 
 
 .code
@@ -79,6 +81,12 @@ LO: ;开始循环等待指令
     cmp eax,cAlwaysOn
     .if Zero?
         invoke alwaysOn,hp
+        jmp LO
+    .endif
+
+    cmp eax,cRandomBullet
+    .if Zero?
+        invoke randomBullet,hp
         jmp LO
     .endif
 
