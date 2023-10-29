@@ -6,11 +6,10 @@ codeF		byte	31h,0C0h,0B0h,0Ah			;指定子弹语句
 codeN		byte	8Bh,44h,24h,10h				;原语句			
 cAddr		dword	46729Ah			;决定子弹语句地址
 
-freeM		byte	"植物们开始狂欢啦，这就是训练的成果吗！",0ah,0dh,0
+freeM		byte	"现在是狂欢时间！！这就是训练的成果吗！",0ah,0dh,0
 normM		byte	"让植物们歇一会儿吧~~~",0ah,0dh,0
 
 th			dword	0	;线程句柄
-Mes		byte "%hhx",0ah,0dh,0
 
 .code
 ranThread proc,			;修改子弹线程
