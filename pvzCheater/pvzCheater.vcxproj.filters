@@ -33,6 +33,12 @@
     <MASM Include="randomBullet.asm">
       <Filter>源文件</Filter>
     </MASM>
+    <MASM Include="ranChoice.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="ranChoiceS.asm">
+      <Filter>源文件</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <None Include="util.inc">
