@@ -17,3 +17,7 @@ stealMoney		proto,	hp:dword		;设置金币
 stealSun		proto,	hp:dword		;设置阳光
 alwaysOn		proto,	hp:dword		;无冷却
 randomBullet	proto,	hp:dword		;随机子弹
+ranChoice		proto,	hp:dword		;随机获得种植（可见图像）
+ranChoiceS		proto,	hp:dword		;随机种植（可见图像）
+ranChoiceSS		proto,	hp:dword		;随机种植，不知道种了啥
+ranChoiceSSS	proto,	hp:dword		;随机放置，不知道是啥
