@@ -39,6 +39,12 @@
     <MASM Include="ranChoiceS.asm">
       <Filter>源文件</Filter>
     </MASM>
+    <MASM Include="ranChoiceSS.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="ranChoiceSSS.asm">
+      <Filter>源文件</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <None Include="util.inc">
