@@ -11,7 +11,7 @@ endMsg		byte		"°×æÎ½ð±Ò³É¹¦£¡£¡£¡",0ah,0dh,0
 .code
 
 stealMoney proc, 
-	hp: dword
+	hp: dword,
 
 	invoke crt_printf,offset coinSet
 	invoke crt_scanf,offset scanNum,offset coinCount

@@ -19,21 +19,27 @@ listM   byte    "0 - 到此为止吧。",0ah,0dh
         byte    "7 - 百变种子，只要反映快就可以种出任意一种植物",0ah,0dh
         byte    "8 - 你的种子可能超出了控制",0ah,0dh
         byte    "9 - 你种下的不一定是种子！",0ah,0dh
+        byte    "10 - 重叠种植",0ah,0dh
+        byte    "11 - 爆炸伤害",0ah,0dh
+        byte    "12 - 解锁全部关卡植物",0ah,0dh
         byte    0
 reqM    byte    "先来点： ",0
 scanM   byte    "%d",0
 cmdin   dword   ?
 ;以下逐个定义指令代码
-cOver           dword       0       ;结束指令
-cFreeSun        dword       1       ;免费植物指令
-cStealMoney     dword       2       ;设置金币指令
-cStealSun       dword       3       ;设置阳光指令
-cAlwaysOn       dword       4       ;取消冷却指令
-cRandomBullet   dword       5       ;随机子弹指令
-cRanChoice      dword       6       ;选出随机可视植物指令
-cRanChoiceS     dword       7       ;随机可选可视植物指令
-cRanChoiceSS    dword       8       ;随机不可见植物指令
-cRanChoiceSSS   dword       9       ;随机不可见植物指令
+cOver               dword       0       ;结束指令
+cFreeSun            dword       1       ;免费植物指令
+cStealMoney         dword       2       ;设置金币指令
+cStealSun           dword       3       ;设置阳光指令
+cAlwaysOn           dword       4       ;取消冷却指令
+cRandomBullet       dword       5       ;随机子弹指令
+cRanChoice          dword       6       ;选出随机可视植物指令
+cRanChoiceS         dword       7       ;随机可选可视植物指令
+cRanChoiceSS        dword       8       ;随机不可见植物指令
+cRanChoiceSSS       dword       9       ;随机不可见植物指令
+cPlantOverlap       dword       10      ;重叠种植指令
+cExplosiveDamage    dword       11      ;爆炸伤害指令
+cUnlockAllPlants    dword       12      ;解锁全部关卡植物指令
 
 .code
 main PROC
@@ -118,6 +124,24 @@ LO: ;开始循环等待指令
     cmp eax,cRanChoiceSSS
     .if Zero?
         invoke ranChoiceSSS,hp
+        jmp LO
+    .endif
+
+    cmp eax,cPlantOverlap
+    .if Zero?
+        invoke plantOverlap,hp
+        jmp LO
+    .endif
+
+    cmp eax,cExplosiveDamage
+    .if Zero?
+        invoke explosiveDamage,hp
+        jmp LO
+    .endif
+
+    cmp eax,cUnlockAllPlants
+    .if Zero?
+        invoke unlockallplants,hp
         jmp LO
     .endif
 
