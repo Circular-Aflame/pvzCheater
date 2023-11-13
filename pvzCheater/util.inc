@@ -21,3 +21,6 @@ ranChoice		proto,	hp:dword		;随机获得种植（可见图像）
 ranChoiceS		proto,	hp:dword		;随机种植（可见图像）
 ranChoiceSS		proto,	hp:dword		;随机种植，不知道种了啥
 ranChoiceSSS	proto,	hp:dword		;随机放置，不知道是啥
+plantOverlap	proto,	hp:dword		;重叠种植
+explosiveDamage	proto,	hp:dword		;爆炸性伤害
+unlockallplants proto,	hp:dword		;解锁全部关卡植物	

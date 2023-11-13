@@ -48,6 +48,12 @@
     <MASM Include="ranChoiceSSS.asm">
       <Filter>源文件</Filter>
     </MASM>
+    <MASM Include="explosiveDamage.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="unlockallplants.asm">
+      <Filter>源文件</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <None Include="util.inc">
